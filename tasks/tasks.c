@@ -10,6 +10,7 @@
 #include "lcd/lcd.h"
 #include "temp/temp.h"
 #include "data/data.h"
+#include "reflow/reflow.h"
 
 void initTasks(void)
 {
@@ -45,6 +46,14 @@ void initTasks(void)
     taskParams.stack = &dataTaskStack;
     taskParams.priority = DATA_TASK_PRIO;
     Task_construct(&dataTaskStruct, (Task_FuncPtr)dataTaskFxn, &taskParams, NULL);
+
+    /* Construct reflow Task thread */
+    Task_Params_init(&taskParams);
+    taskParams.arg0 = NULL;
+    taskParams.stackSize = REFLOW_TASK_STACKSIZE;
+    taskParams.stack = &reflowTaskStack;
+    taskParams.priority = REFLOW_TASK_PRIO;
+    Task_construct(&reflowTaskStruct, (Task_FuncPtr)reflowTaskFxn, &taskParams, NULL);
 }
 
 

@@ -14,10 +14,12 @@
 #define LCD_TASK_STACKSIZE 2048
 #define TEMP_TASK_STACKSIZE 2048
 #define DATA_TASK_STACKSIZE 2048
+#define REFLOW_TASK_STACKSIZE 2048
 
 #define LCD_TASK_PRIO 1
 #define TEMP_TASK_PRIO 1
 #define DATA_TASK_PRIO 1
+#define REFLOW_TASK_PRIO 1
 
 #define TCPPACKETSIZE 256
 #define NUMTCPWORKERS 3
@@ -33,6 +35,9 @@ Char tempTaskStack[TEMP_TASK_STACKSIZE];
 
 Task_Struct dataTaskStruct;
 Char dataTaskStack[DATA_TASK_STACKSIZE];
+
+Task_Struct reflowTaskStruct;
+Char reflowTaskStack[REFLOW_TASK_STACKSIZE];
 
 void initTasks(void);
 

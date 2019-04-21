@@ -18,6 +18,7 @@
 #include "Board.h"
 #include "lcd/lcd.h"
 #include "temp.h"
+#include "relay/relay.h"
 
 #define SPI_MSG_LENGTH 4
 
@@ -84,6 +85,11 @@ void tempTaskFxn(void)
         }
 
         System_flush();
+
+        if (temperature > 28)
+            relayOn();
+        else
+            relayOff();
 
         Task_sleep(1000);
     }
