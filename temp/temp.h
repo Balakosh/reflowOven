@@ -8,7 +8,10 @@
 #ifndef TEMP_TEMP_H_
 #define TEMP_TEMP_H_
 
+#include <ti/sysbios/knl/Semaphore.h>
+
 float temperature;
+Semaphore_Handle temperatureUpdateSemaphore;
 
 void tempTaskFxn(void);
 

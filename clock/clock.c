@@ -26,6 +26,10 @@ void initTimer(void)
     Error_init(&eb);
     Timer_Params_init(&timerParams);
 
+    timerParams.period = 1;
+    timerParams.runMode = Timer_RunMode_CONTINUOUS;
+    timerParams.startMode = Timer_StartMode_AUTO;
+
     usTimerHandle = Timer_create(Timer_ANY, (Timer_FuncPtr)&clockIsr, &timerParams, &eb);
 }
 

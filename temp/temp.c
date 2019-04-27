@@ -14,6 +14,7 @@
 
 #include <ti/sysbios/BIOS.h>
 #include <ti/sysbios/knl/Task.h>
+#include <ti/sysbios/knl/Semaphore.h>
 
 #include "Board.h"
 #include "lcd/lcd.h"
@@ -49,11 +50,11 @@ void tempTaskFxn(void)
 
     if (masterSpi == NULL)
     {
-        System_abort("Error initializing SPI\n");
+//        System_abort("Error initializing SPI\n");
     }
     else
     {
-        System_printf("SPI initialized\n");
+//        System_printf("SPI initialized\n");
     }
 
     /* Initialize master SPI transaction structure */
@@ -73,18 +74,20 @@ void tempTaskFxn(void)
 
         if(transferOK)
         {
-            char buffer[100];
+//            char buffer[100];
+//
+//            snprintf(buffer, sizeof(buffer), "TempF=%f 0=%x 1=%x\n",
+//                     temperature, masterRxBuffer[0], masterRxBuffer[1]);
+//            System_printf(buffer);
 
-            snprintf(buffer, sizeof(buffer), "TempF=%f 0=%x 1=%x\n",
-                     temperature, masterRxBuffer[0], masterRxBuffer[1]);
-            System_printf(buffer);
+            Semaphore_post(temperatureUpdateSemaphore);
         }
         else
         {
-            System_printf("Unsuccessful master SPI transfer");
+//            System_printf("Unsuccessful master SPI transfer");
         }
 
-        System_flush();
+//        System_flush();
 
         if (temperature > 28)
             relayOn();

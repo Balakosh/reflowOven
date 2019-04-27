@@ -35,11 +35,11 @@ bool i2cWrite(uint8_t* data, uint8_t len)
 
     if (i2c == NULL)
     {
-        System_abort("Error Initializing I2C\n");
+//        System_abort("Error Initializing I2C\n");
     }
     else
     {
-        System_printf("I2C Initialized!\n");
+//        System_printf("I2C Initialized!\n");
     }
 
     i2cTransaction.slaveAddress = 0x27;
@@ -50,19 +50,14 @@ bool i2cWrite(uint8_t* data, uint8_t len)
 
     if (I2C_transfer(i2c, &i2cTransaction))
     {
-        System_printf("I2C OK\n");
         success = true;
     }
     else
     {
-        System_printf("I2C Bus fault\n");
         success = false;
     }
 
     I2C_close(i2c);
-    System_printf("I2C closed!\n");
-
-    System_flush();
 
     return success;
 }

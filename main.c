@@ -8,6 +8,7 @@
 /* BIOS Header files */
 #include <ti/sysbios/BIOS.h>
 #include <ti/sysbios/knl/Mailbox.h>
+#include <ti/sysbios/knl/Semaphore.h>
 
 /* TI-RTOS Header files */
 // #include <ti/drivers/EMAC.h>
@@ -23,6 +24,8 @@
 #include "Board.h"
 #include "tasks/tasks.h"
 #include "lcd/lcd.h"
+#include "reflow/reflow.h"
+#include "temp/temp.h"
 
 void initMailbox(void)
 {
@@ -33,6 +36,18 @@ void initMailbox(void)
     Mailbox_Params_init(&params);
 
     lcdMailbox = Mailbox_create(sizeof(lcdMailboxStruct), 10, &params, &eb);
+}
+
+void initSemaphore(void)
+{
+    Error_Block eb;
+    Semaphore_Params params;
+
+    Error_init(&eb);
+
+    reflowStartSemaphore = Semaphore_create(0, &params, &eb);
+    reflowSemaphore = Semaphore_create(0, &params, &eb);
+    temperatureUpdateSemaphore = Semaphore_create(0, &params, &eb);
 }
 
 int main(void)

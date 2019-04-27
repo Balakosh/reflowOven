@@ -290,7 +290,7 @@ GPIO_PinConfig gpioPinConfigs[] = {
     /* EK_TM4C1294XL_USR_SW1 */
     GPIOTiva_PJ_0 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
     /* EK_TM4C1294XL_USR_SW2 */
-    GPIOTiva_PJ_1 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,
+    GPIOTiva_PK_6 | GPIO_CFG_IN_PD | GPIO_CFG_IN_INT_RISING,
 
     /* Output pins */
     /* EK_TM4C1294XL_USR_D1 */
